@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+{% if page %}
+<div class="form-group">
+    <form method="POST" action="">
+        {% csrf_token %}
+        <label>USERNAME</label>
+
+        <input type="username" name="username" placeholder="USERNAME" />
+
+        <label>PASSWORD</label>
+        <input type="password" name="password" placeholder="PASSWORD" />
+
+        <input type="submit" value="LOGIN">
+        <br><hr>
+        <p>Have not signed Up?</p> <a href="{% url 'registration' %}">Register</a>
+
+
+
+    </form>
+</div>
+{% else %}
+<div>
+    <form method="POST" action="">
+        {% csrf_token %}
+        <h1>REGISTRATION</h1><br>
+        <p><label>Create USERNAME</label>
+           {{ form.username }}<br><hr></p>
+        <p><label>Create Password</label>
+            {{ form.password1 }}<br><hr></p>
+        <p><label>Re-enter Password</label>
+           {{ form.password2 }}<br><hr></p>
+
+        <input type="submit" value="Register">
+
+
+        <p>Already signed up</p><a href="{% url 'login' %}">Login</a>
+
+    </form>
+</div>
+{% endif %}
+
+
+
+
+
+
+{% endblock %}

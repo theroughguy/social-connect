@@ -1,0 +1,8 @@
+body{
+ background-image: linear-gradient(-20deg, #00cdac 0%, #8ddad5 100%);
+}
+
+.profile{
+    display:grid;
+    grid-template-columns: 1fr 3fr 1fr;
+}

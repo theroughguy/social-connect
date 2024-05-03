@@ -1,0 +1,181 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Room </title>
+
+<style>
+    .room-container{
+
+        display: grid;
+        grid-template-columns: 3fr 1fr;
+    }
+
+
+
+</style>
+
+
+
+
+{% if page %}
+
+
+
+  <div class="room-container" >
+
+    <div>
+        <div class="wrapper" >
+            <p>
+                <h5> {{room.name }}</h5>
+                {{ room.description }}
+            </p>
+        </div>
+        <br>
+
+        <div >
+
+        <h1>COMMENTS EDITOR</h1>
+        <p>
+            {% for message in message_room %}
+                {% if message.id == comment.id %}
+                    <form method="POST" action="">
+
+                    {% csrf_token %}
+                    <input type="text" name="body" value="{{ comment.body }}" />
+                    <input type="submit" value="UPDATE COMMENT">
+                    </form>
+                {% else %}
+
+                @{{ message.user }}
+                {{ message.body }} >> {{ message.created|timesince }} Ago
+
+                {% endif %}
+
+
+
+
+            <hr>
+
+
+            {% endfor %}
+
+        </p>
+
+        </div>
+        {% if request.user.is_authenticated %}
+        <div>
+            <form method="POST" action="">
+
+                {% csrf_token %}
+            <input type="text" name="comment" placeholder="write you comment here..." required>
+            </form>
+        </div>
+        {% endif %}
+    </div>
+
+    <div >
+    <h1>PARTICIPANTS</h1>
+        {% for participant in participants %}
+        <div>
+            <p> @{{ participant.username }}</p>
+        </div>
+        {% endfor %}
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% else %}
+
+    <div class="room-container" >
+
+        <div>
+            <div class="wrapper" >
+                <p>
+                    <h5> {{room.name }}</h5>
+                    {{ room.description }}
+                </p>
+            </div>
+            <br>
+
+            <div >
+
+            <h1>COMMENTS</h1>
+            <p>
+                {% for message in message_room %}
+
+                    @{{ message.user }}
+                    {{ message.body }} >> {{ message.created|timesince }} Ago
+
+
+
+                    {% if request.user == message.user %}
+
+
+
+
+
+                        <a href="{% url 'update-message' message.id %}">UPDATE</a>
+                        <a href="{% url 'delete-message' message.id %}">DELETE</a>
+                    {% endif %}
+                <hr>
+
+
+                {% endfor %}
+
+            </p>
+
+            </div>
+            {% if request.user.is_authenticated %}
+            <div>
+                <form method="POST" action="">
+
+                    {% csrf_token %}
+                <input type="text" name="comment" placeholder="write you comment here..." required>
+                </form>
+            </div>
+            {% endif %}
+        </div>
+
+        <div >
+        <h1>PARTICIPANTS</h1>
+            {% for participant in participants %}
+            <div>
+                <p> @{{ participant.username }}</p>
+            </div>
+            {% endfor %}
+        </div>
+
+
+{% endif %}
+
+
+
+
+
+{% endblock %}
+
+

@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+
+
+
+
+
+{% block content %}
+<h1>{{ user.username }}</h1>
+<div class="profile">
+
+    <div>
+
+        {% include 'chat/topic_component.html' %}
+
+    </div>
+
+
+
+    <div>
+        {% include 'chat/feed_component.old.html' %}
+
+    </div>
+
+
+    <div>
+        {% include 'chat/activity_component.old.html' %}
+
+    </div>
+
+</div>
+
+
+
+{% endblock content %}
