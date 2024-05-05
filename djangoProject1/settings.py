@@ -137,5 +137,5 @@ EMAIL_USE_TLS = True
 
 EMAIL_HOST_USER = "sultan1056892@gmail.com"
 
-EMAIL_HOST_PASSWORD = "zzag etcd bxqo zjrb"
+EMAIL_HOST_PASSWORD = ""
 
